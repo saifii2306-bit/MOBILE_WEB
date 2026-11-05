@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Owner Panel — Galaxy Mobile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <div id="loginScreen" class="login-screen">
+    <form id="loginForm" class="login-card">
+      <h1><i class="fas fa-lock"></i> Owner Only</h1>
+      <p>This page is hidden from visitors. Normal users never see a password — only you open this URL.</p>
+      <label for="ownerPassword">Owner password</label>
+      <input type="password" id="ownerPassword" required placeholder="Your private password" autocomplete="current-password" />
+      <button type="submit" class="btn-primary">Login</button>
+      <p id="loginError" class="error-text" hidden></p>
+    </form>
+  </div>
+
+  <div id="adminPanel" class="admin-panel" hidden>
+    <header class="admin-header">
+      <div>
+        <h1>Galaxy Mobile — Owner Panel</h1>
+        <p>Edit website content and read customer messages.</p>
+      </div>
+      <button type="button" id="logoutBtn" class="btn-outline"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </header>
+
+    <section class="admin-section inbox-section">
+      <h2><i class="fas fa-inbox"></i> Customer messages & bookings</h2>
+      <p class="section-note">Saved on your server — no Gmail needed. Read and reply from here.</p>
+      <div id="inboxList" class="inbox-list"></div>
+    </section>
+
+    <div id="emailAlert" class="alert alert-info" hidden>
+      <i class="fas fa-envelope"></i>
+      <div>
+        <strong>Optional: also send to Gmail</strong>
+        <p>Add <code>SMTP_PASS</code> in <code>server/.env</code> for email copies. Messages are already saved below.</p>
+      </div>
+    </div>
+
+    <form id="contentForm" class="admin-form">
+      <section class="admin-section">
+        <h2><i class="fas fa-star"></i> Hero section</h2>
+        <div class="field-grid">
+          <label>Badge <input type="text" id="heroBadge" /></label>
+          <label>Title <input type="text" id="heroTitle" /></label>
+          <label class="full">Subtitle <textarea id="heroSubtitle" rows="2"></textarea></label>
+          <label>Owner name <input type="text" id="heroOwnerName" /></label>
+        </div>
+      </section>
+
+      <section class="admin-section">
+        <h2><i class="fas fa-chart-line"></i> Stats (3 boxes)</h2>
+        <div class="stats-edit" id="statsFields"></div>
+      </section>
+
+      <section class="admin-section theme-manager">
+        <h2><i class="fas fa-palette"></i> Change website theme (owner only)</h2>
+        <p class="section-note">You have 3 themes. Pick one — visitors see only the active theme on the main website.</p>
+        <input type="hidden" id="activeTheme" value="0" />
+        <div id="themePicker" class="theme-picker"></div>
+        <div id="themeFields" class="theme-edit"></div>
+      </section>
+
+      <section class="admin-section">
+        <h2><i class="fas fa-users"></i> Team (3 members — public)</h2>
+        <p class="section-note">Shown to all visitors on main website.</p>
+        <div id="teamFields" class="team-edit"></div>
+      </section>
+
+      <section class="admin-section">
+        <h2><i class="fas fa-phone"></i> Contact info</h2>
+        <div class="field-grid">
+          <label>Phone display <input type="text" id="contactPhone" /></label>
+          <label>Phone digits (WhatsApp) <input type="text" id="contactPhoneRaw" placeholder="918126601283" /></label>
+          <label>Email <input type="email" id="contactEmail" /></label>
+          <label class="full">Showroom note <textarea id="contactShowroom" rows="2"></textarea></label>
+        </div>
+      </section>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Save all changes</button>
+        <a href="/" target="_blank" class="btn-outline">View website</a>
+      </div>
+      <p id="saveStatus" class="save-status" hidden></p>
+    </form>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
+
